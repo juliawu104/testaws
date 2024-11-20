@@ -1,0 +1,35 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install -g pnpm
+  pre_build:
+    commands:
+      - pnpm install
+  build:
+    commands:
+      - pnpm run build
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: build
+
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo Entered the preBuild phase...
+        - npm install
+    build:
+      commands:
+        - echo Entered the build phase...
+        - npm run build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
